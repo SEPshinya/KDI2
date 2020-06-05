@@ -22,7 +22,7 @@ public class AddBL extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddBL() {
+     public AddBL() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -71,7 +71,7 @@ public class AddCommitBL extends HttpServlet {
 
 			    if(line>0) {
 			    	 out.println("’Ç‰Á‚µ‚Ü‚µ‚½");
-			     }
+			      }
 		     stmt.close();
 		     con.close();
 		}catch(Exception e){
