@@ -11,7 +11,7 @@ request.setCharacterEncoding("UTF-8");
 <title></title>
 </head>
 <body>
-<p>住所録管理システム：住所録編集</p>
+<p>住所録管理システム：住所録登録</p>
 <form action="AddBL" method="GET">
 
  <ul style="list-style-type: none">

@@ -59,7 +59,7 @@ public class AddCommitBL extends HttpServlet {
 
 
 
-		     PreparedStatement stmt = con.prepareStatement( "insert into jyusyoroku values (null,?,?,?,?,null)");
+		     PreparedStatement stmt = con.prepareStatement( "insert into jyusyoroku values (null,?,?,?,?,0)");
 
 		     stmt.setString(1,name);
 		     stmt.setString(2,address);
