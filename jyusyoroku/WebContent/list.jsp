@@ -11,7 +11,7 @@
 
   <tr>
     <th>No.</th> <th>名前</th> <th>電話番号</th>　<th>カテゴリ</th>
-  </tr>
+   </tr>
 
   <tr>
     <td></td> <td></td> <td></td><td></td> <td></td> <td></td>

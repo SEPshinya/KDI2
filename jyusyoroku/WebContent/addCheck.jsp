@@ -15,7 +15,7 @@ request.setCharacterEncoding("UTF-8");
 <form action="AddCommitBL" method="post">
 
 
-<ul style="list-style-type: none">
+ <ul style="list-style-type: none">
 <li>名前*　　　　：<%= request.getParameter("name") %></li>
 <li>住所*　　　　：<%= request.getParameter("address") %></li>
 <li>電話番号　　：<%= request.getParameter("tell") %></li>
