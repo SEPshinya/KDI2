@@ -11,30 +11,22 @@ request.setCharacterEncoding("UTF-8");
 <title></title>
 </head>
 <body>
-<p>一覧仮説</p>
-<form action="ListBL" method="GET">
+<p>住所録管理システム：住所録編集確認</p>
+<form action="EditCommitBL" method="post">
 
-
- <ul style="list-style-type: none">
-<li><%= request.getParameter("id") %></li>
-<li><%= request.getParameter("name") %></li>
-<li><%= request.getParameter("address") %></li>
-<li><%= request.getParameter("tell") %></li>
-<li><%= request.getParameter("dlete_flg") %></li>
+<ul style="list-style-type: none">
+<li>名前*　　　　：<%= request.getParameter("name") %></li>
+<li>住所*　　　　：<%= request.getParameter("address") %></li>
+<li>電話番号　　：<%= request.getParameter("tell") %></li>
 </ul>
 
-<input type="hidden" name="id" value="<%= request.getParameter("id") %>">
 <input type="hidden" name="name" value="<%= request.getParameter("name") %>">
 <input type="hidden" name="address" value="<%= request.getParameter("address") %>">
 <input type="hidden" name="tell" value="<%= request.getParameter("tell") %>">
 <input type="hidden" name="categoryid" value="<%= request.getParameter("categoryid") %>">
-<input type="hidden" name="delete_flg" value="<%= request.getParameter("delete_flg") %>">
 
-
-
-
-
-
+<input type="submit" value="確認">
+<input type="reset" value="戻る">
 
 </form>
 </body>

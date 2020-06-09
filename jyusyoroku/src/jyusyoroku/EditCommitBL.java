@@ -1,3 +1,4 @@
+
 package jyusyoroku;
 
 import java.io.IOException;
@@ -12,41 +13,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
- * Servlet implementation class AddCommitBL
+ * Servlet implementation class EditBL
  */
-@WebServlet("/AddCommitBL")
-public class AddCommitBL extends HttpServlet {
+@WebServlet("/EditCommitBL")
+public class EditCommitBL extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
-     * @see HttpServlet#HttpServlet()
+     * Default constructor.
      */
-    public AddCommitBL() {
-        super();
+    public EditCommitBL() {
         // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		this.doPost(request, response);
-
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
 		PrintWriter out=response.getWriter();
-	    //response.setContentType("text/html; charset=Shift_JIS");
-
-
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
 		     Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/hara?characterEncoding=UTF-8&serverTimezone=JST", "root", "");
@@ -58,8 +52,8 @@ public class AddCommitBL extends HttpServlet {
 
 
 
-
-		     PreparedStatement stmt = con.prepareStatement( "insert into jyusyoroku values (null,?,?,?,?,null)");
+		     //UPDATE [テーブル名] SET [更新処理] WHERE [条件式]
+		     PreparedStatement stmt = con.prepareStatement("update jyusyoroku set  name=?,address=?,tel=?,categoryid=?  where id='1'");
 
 		     stmt.setString(1,name);
 		     stmt.setString(2,address);
@@ -78,8 +72,4 @@ public class AddCommitBL extends HttpServlet {
 
 
 	}
-
 }
-
-
-
