@@ -17,7 +17,7 @@ request.setCharacterEncoding("UTF-8");
 <ul style="list-style-type: none">
 <li>名前*　　　　：<%= request.getParameter("name") %></li>
 <li>住所*　　　　：<%= request.getParameter("address") %></li>
-<li>電話番号　　：<%= request.getParameter("tell") %></li>
+<li>電話番号　 　：<%= request.getParameter("tell") %></li>
 </ul>
 
 <input type="hidden" name="name" value="<%= request.getParameter("name") %>">

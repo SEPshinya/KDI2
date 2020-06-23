@@ -16,8 +16,8 @@ request.setCharacterEncoding("UTF-8");
  <ul style="list-style-type: none">
 <li>名前*　　　　：<input type="text" name="name" value="hidenで後から持ってくる"></li>
 <li>住所*　　　　：<input type="text" name="address" value="後から持ってくる"></li>
-<li>電話番号　　：<input type="text" name="tell" value="後から持ってくる"></li>
-<li>カテゴリ　　　 ：<select name="categoryid">
+<li>電話番号　 　：<input type="text" name="tell" value="後から持ってくる"></li>
+<li>カテゴリ　 　：<select name="categoryid">
 <option value="1">家族</option>
 <option value="2">親戚</option>
 <option value="3">知人</option>
