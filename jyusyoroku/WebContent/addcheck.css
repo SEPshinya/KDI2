@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+p{
+	font-size:20px;
+	font-weight:bold;
+}
+
+
+li {
+  width: 100%;
+  list-style-type: none;
+  text-align:left;
+}
+
