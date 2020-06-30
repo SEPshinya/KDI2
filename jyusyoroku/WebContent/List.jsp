@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%
-    ResultSet rs;
-    int listCnt;
-    String nowPage;
-    int maxPage;
-    %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,12 +15,15 @@
 <li><input type="submit" value="検索"></li>
 </ul>
 <ul>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
+<li><a href=http://localhost:8080/jyusyoroku/List.jsp?1>＜＜</a></li>
+<li><a href=http://localhost:8080/jyusyoroku/List.jsp?<%request.getParameter("tell"); %>></a></li>
+<li><a href=http://localhost:8080/jyusyoroku/List.jsp?<%request.getParameter("tell"); %>></a></li>
+<li><a href=http://localhost:8080/jyusyoroku/List.jsp?<%request.getParameter("tell"); %>>２</a></li>
+<li><a href=http://localhost:8080/jyusyoroku/List.jsp?<%request.getParameter("tell"); %>>３</a></li>
+<li><a href=http://localhost:8080/jyusyoroku/List.jsp?<%request.getParameter("tell"); %>>４</a></li>
+<li><a href=http://localhost:8080/jyusyoroku/List.jsp?<%request.getParameter("tell"); %>>5</a></li>
+<li><a href=http://localhost:8080/jyusyoroku/List.jsp?<%request.getParameter("tell"); %>>＞</a></li>
+<li><a href=http://localhost:8080/jyusyoroku/List.jsp?<%request.getParameter("maxPage"); %>>＞＞</a></li>
 </ul>
 </form>
 

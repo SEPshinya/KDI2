@@ -44,6 +44,18 @@ public class ListBL extends HttpServlet {
 		String nowPage=null; //今のpage
 		int limitSta =2;//検索開始件数
 		String Serchname=null;
+		int maxPage;
+		
+		
+		if(nowPage==null) {
+			nowPage=""+1;
+		}
+		
+		if(nowPage=="1"){
+			page1=
+			request.setAttribute("nowPage",nowPage);
+			
+		}
 
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
@@ -59,6 +71,8 @@ public class ListBL extends HttpServlet {
 			 Serchname = request.getParameter("Serchname");
 			 if(Serchname==null){
 				 SelectQuery="select * from jyusyoroku where delete_flg=0 limit"+limitSta+",10";
+
+				 
 			 }else {
 				 SelectQuery="select * from jyusyoroku where delete_flg=0like"+Serchname+"limit"+limitSta+",10";
 			 };
@@ -67,8 +81,10 @@ public class ListBL extends HttpServlet {
 			 rs =ps.executeQuery();
 			 while(rs.next()) {
 				 int id=rs.getInt("id");
+				 
 
 			 }
+			 
 
 			request.setAttribute("listCnt",listCnt);
 			request.setAttribute("Result",rs);
