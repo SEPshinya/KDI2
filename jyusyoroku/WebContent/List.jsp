@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%
+<%
 request.setCharacterEncoding("UTF-8");
 %>
 <!DOCTYPE html>
@@ -12,9 +12,9 @@ request.setCharacterEncoding("UTF-8");
 <body>
 <form action="ListBL" method="get">
 <h1><%= request.getAttribute("nowPage")%></h1>
-<input type="button" onclick="location.href='/add.jsp'" value="新規登録">
+<input type="button" onclick="location.href='./add.jsp'" value="新規登録">
 <ul>
-<li><input type="text" name="Serchname"></li>
+<li><input type="text" name="SerchName"></li>
 <li><input type="submit" value="検索"></li>
 </ul>
 <ul>

@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,25 +33,140 @@ public class ListBL extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Connection connect=null;   //接続
+		Statement stmt=null;       //接続
+		PreparedStatement ps=null; //接続
+		ResultSet rs=null;         //取得
+		int listCnt=0;        //総件数
+		String SelectQuery=null; //表取得
+		String CntQuery=null;    //件数取得
+		String nowPage=null;     //現在のページ
+		String SerchName=null;  //検索用文字列 HTMLからテキストで持ってくる
+		int limitSta=0;     //検索開始位置
+
+
+
+		int id=0; //ID
+		String name=null;  //名前
+		String address=null; //住所
+		String tel=null;    //電話番号
+		String categoryid=null; //カテゴリー
+
+		request.setCharacterEncoding("UTF-8");//文字コード
 		PrintWriter out=response.getWriter();
-		ResultSet rs;
-		PreparedStatement ps;
-		int listCnt=0; //総件数
-		String CntQuery;
-		String SelectQuery=null;
-		Connection connect=null;
-		Statement stmt;
-		String nowPage=null; //今のpage
-		int limitSta;//検索開始件数
-		String Serchname=null;
-		int n=0;
-		ArrayList<Integer> Idlist=new ArrayList<Integer>();
-		ArrayList<String> namelist=new ArrayList<String>();
-		ArrayList<String> addlist=new ArrayList<String>();
-		ArrayList<String> tellist=new ArrayList<String>();
-		ArrayList<String> catlist=new ArrayList<String>();
+
+//-----------データベース接続-----------------------------------------------------
+		try {
+			 Class.forName("com.mysql.jdbc.Driver");
+		     Connection connect = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/hara?characterEncoding=UTF-8&serverTimezone=JST", "root", "");
+
+		     //全件数取得
+			 CntQuery="select count(*) id FROM jyusyoroku where delete_flg=0";
+			 stmt=connect.createStatement();
+			 rs = stmt.executeQuery(CntQuery);
+			 rs.next();
+			 listCnt = rs.getInt("id");
+
+//-----------検索分岐-------------------------------------------------------------
+			 SerchName = request.getParameter("SerchName");
+			 if(SerchName==null){
+				 SelectQuery="select * from jyusyoroku where delete_flg=0 limit "+limitSta+",10";
+				 //SELECT * FROM `jyusyoroku` WHERE delete_flg=0 LIMIT 10
+			 }else {
+				 SelectQuery="select * from jyusyoroku where delete_flg=0 like "+SerchName+" limit "+limitSta+",10";
+			 };
+
+//-----------検索分岐SQL実行-------------------------------------------------------
+			 ps=connect.prepareStatement(SelectQuery);
+			 rs =ps.executeQuery();
+			List<String> list = new ArrayList<>();
+			List<Integer> nlist = new ArrayList<>();
+
+			 while(rs.next()) {
+				 id=rs.getInt("id");
+				 name=rs.getString("name");
+				 address=rs.getString("address");
+				 tel=rs.getString("tel");
+				 categoryid=rs.getString("categoryid");
+
+				 nlist.add(id);
+				 list.add(name);
+				 list.add(address);
+				 list.add(tel);
+				 list.add(categoryid);
+			 }
+//------------jspに飛ばす---------------------------------------------
+				 request.setAttribute("id0",nlist.get(0));
+				 request.setAttribute("name0",list.get(0));
+				 request.setAttribute("address0",list.get(1));
+				 request.setAttribute("tel0",list.get(2));
+				 request.setAttribute("categoryid0",list.get(3));
+
+				 request.setAttribute("id1",nlist.get(1));
+				 request.setAttribute("name1",list.get(4));
+				 request.setAttribute("address1",list.get(5));
+				 request.setAttribute("tel1",list.get(6));
+				 request.setAttribute("categoryid1",list.get(7));
+
+				 request.setAttribute("id2",nlist.get(2));
+				 request.setAttribute("name2",list.get(8));
+				 request.setAttribute("address2",list.get(9));
+				 request.setAttribute("tel2",list.get(10));
+				 request.setAttribute("categoryid2",list.get(11));
+
+				 request.setAttribute("id3",nlist.get(3));
+				 request.setAttribute("name3",list.get(12));
+				 request.setAttribute("address3",list.get(13));
+				 request.setAttribute("tel3",list.get(14));
+				 request.setAttribute("categoryid3",list.get(15));
+
+				 request.setAttribute("id4",nlist.get(4));
+				 request.setAttribute("name4",list.get(16));
+				 request.setAttribute("address4",list.get(17));
+				 request.setAttribute("tel4",list.get(18));
+				 request.setAttribute("categoryid4",list.get(19));
+
+				 request.setAttribute("id5",nlist.get(5));
+				 request.setAttribute("name5",list.get(20));
+				 request.setAttribute("address5",list.get(21));
+				 request.setAttribute("tel5",list.get(22));
+				 request.setAttribute("categoryid5",list.get(23));
+
+				 request.setAttribute("id6",nlist.get(6));
+				 request.setAttribute("name6",list.get(24));
+				 request.setAttribute("address6",list.get(25));
+				 request.setAttribute("tel6",list.get(26));
+				 request.setAttribute("categoryid6",list.get(27));
+
+				 request.setAttribute("id7",nlist.get(7));
+				 request.setAttribute("name7",list.get(28));
+				 request.setAttribute("address7",list.get(29));
+				 request.setAttribute("tel7",list.get(30));
+				 request.setAttribute("categoryid7",list.get(31));
+
+				 request.setAttribute("id8",nlist.get(8));
+				 request.setAttribute("name8",list.get(32));
+				 request.setAttribute("address8",list.get(33));
+				 request.setAttribute("tel8",list.get(34));
+				 request.setAttribute("categoryid8",list.get(35));
+
+				 request.setAttribute("id9",nlist.get(9));
+				 request.setAttribute("name9",list.get(36));
+				 request.setAttribute("address9",list.get(37));
+				 request.setAttribute("tel9",list.get(38));
+				 request.setAttribute("categoryid9",list.get(39));
+
+
+//-----------close-----------------------------------------------------------------
+				ps.close();
+				stmt.close();
+				rs.close();
+			    connect.close();
+			}catch(Exception e){
+				e.printStackTrace(out);
+			}
+//---------------ページング用---------------------
 		String page1=null;
 		String page2=null;
 		String page3=null;
@@ -58,7 +174,7 @@ public class ListBL extends HttpServlet {
 		String page5=null;
 		String prev=null;
 		String next=null;
-
+//---------------ページングの処理----------------------------
 		nowPage = request.getParameter("page");
 		if(nowPage==null) {
 		nowPage="1";
@@ -72,60 +188,8 @@ public class ListBL extends HttpServlet {
 			limitSta=np*10;
 		};
 
-		try {
-			 Class.forName("com.mysql.jdbc.Driver");
-			 request.setCharacterEncoding("UTF-8");
-			 connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/hara?characterEncoding=UTF-8&serverTimezone=JST", "root", "");
-			 CntQuery="SELECT COUNT(*) FROM jyusyoroku";
-			 stmt=connect.createStatement();
-			 rs = stmt.executeQuery(CntQuery);
-			 rs.next();
-			 listCnt = rs.getInt("1");
-
-			 //検索した？
-			 Serchname = request.getParameter("Serchname");
-			 if(Serchname==null){
-				 SelectQuery="select * from jyusyoroku where delete_flg=0 limit "+limitSta+",10";
-				 //SELECT * FROM `jyusyoroku` WHERE delete_flg=0 LIMIT 10
-			 }else {
-				 SelectQuery="select * from jyusyoroku where delete_flg=0 like "+Serchname+" limit "+limitSta+",10";
-			 };
-
-			 ps=connect.prepareStatement(SelectQuery);
-			 rs =ps.executeQuery();
-
-			 while(rs.next()) {
-
-				 int id=rs.getInt("id");
-				 Idlist.add(id);
-				 String name=rs.getString("name");
-				 namelist.add(name);
-				 String address=rs.getString("address");
-				 addlist.add(address);
-				 String tel = rs.getString("tel");
-				 tellist.add(tel);
-				 String categoryid=rs.getString("categoryid");
-				 catlist.add(categoryid);
-
-				request.setAttribute("id"+n,Idlist.get(n));
-				request.setAttribute("name"+n, namelist.get(n));
-				request.setAttribute("address"+n, addlist.get(n));
-				request.setAttribute("tel"+n, tellist.get(n));
-				request.setAttribute("categoryid"+n,catlist.get(n));
-				n++;
-			 }
-
-			ps.close();
-			stmt.close();
-			rs.close();
-		    connect.close();
-		}catch(Exception e){
-			e.printStackTrace(out);
-		}
-
-		int lc =listCnt;
-		int maxPage=lc/10;                  //最大ページを計算
-
+//---------------最大ページを計算-----------------------------
+		int maxPage=listCnt/10;
 		int mp =maxPage;
 		request.setAttribute("Max", maxPage);
 
@@ -144,7 +208,7 @@ public class ListBL extends HttpServlet {
 			prev=""+(np-1);
 			request.setAttribute("prev",prev);
 		};
-
+//			1から３ページまで
 		if(np<=3) {
 			page1="1";
 			page2="2";
@@ -162,7 +226,7 @@ public class ListBL extends HttpServlet {
 		getServletContext().getRequestDispatcher("/List.jsp").forward(request, response);
 
 		}else
-
+//3ページ以上max-2未満
 		if(np>3 && np<=mp-2) {
 			page1=""+(np-2);
 			page2=""+(np-1);
@@ -179,7 +243,7 @@ public class ListBL extends HttpServlet {
 
 			getServletContext().getRequestDispatcher("/List.jsp").forward(request, response);
 		}else
-
+//maxpage-2からのページ
 		if(np<=mp&&np>=mp-2){
 
 		page1=""+(mp-4);
@@ -195,7 +259,7 @@ public class ListBL extends HttpServlet {
 		request.setAttribute("page5", page5);
 		request.setAttribute("nowPage", nowPage);
 	    getServletContext().getRequestDispatcher("/List.jsp").forward(request, response);
-	}
+	 }
 }
 
 	/**
