@@ -1,6 +1,5 @@
 package jyusyoroku;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -43,16 +42,8 @@ public class ListBL extends HttpServlet {
 		String SerchName=null;  //検索用文字列 HTMLからテキストで持ってくる
 		int limitSta=0;     //検索開始位置
 
-
-
-		int id=0; //ID
-		String name=null;  //名前
-		String address=null; //住所
-		String tel=null;    //電話番号
-		String categoryid=null; //カテゴリー
-
 		request.setCharacterEncoding("UTF-8");//文字コード
-		PrintWriter out=response.getWriter();
+
 
 //-----------データベース接続-----------------------------------------------------
 		try {
@@ -72,24 +63,26 @@ public class ListBL extends HttpServlet {
 				 SelectQuery="select * from jyusyoroku where delete_flg=0 limit "+limitSta+",10";
 				 //SELECT * FROM `jyusyoroku` WHERE delete_flg=0 LIMIT 10
 			 }else {
-				 SelectQuery="select * from jyusyoroku where delete_flg=0 like "+SerchName+" limit "+limitSta+",10";
+				 SelectQuery="select * from jyusyoroku where delete_flg=0 and address like "+"'"+SerchName+"'"+" limit "+limitSta+",10";
 			 };
 
 //-----------検索分岐SQL実行-------------------------------------------------------
 			 ps=connect.prepareStatement(SelectQuery);
 			 rs =ps.executeQuery();
 
+
 //------------rsをjspに飛ばす---------------------------------------------
 			 request.setAttribute("rs", rs);
-			 getServletContext().getRequestDispatcher("/List.jsp").forward(request, response);
+			// RequestDispatcher rd=request.getRequestDispatcher("/List.jsp");
+			// rd.forward(request, response);
 
 //-----------close-----------------------------------------------------------------
-				ps.close();
-				stmt.close();
-				rs.close();
-			    connect.close();
+				//ps.close();
+				//stmt.close();
+				//rs.close();
+			    //connect.close();
 			}catch(Exception e){
-				e.printStackTrace(out);
+
 			}
 //---------------ページング用---------------------
 		String page1=null;

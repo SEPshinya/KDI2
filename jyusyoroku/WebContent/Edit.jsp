@@ -17,9 +17,9 @@ request.setCharacterEncoding("UTF-8");
 
 <div align=center>
  <ul style="list-style-type: none">
-<li>名前*　　 　：<input type="text" class="name"name="name" value="hidenで後から持ってくる"></li>
-<li>住所*　　 　：<input type="text" class="address"name="address" value="後から持ってくる"></li>
-<li>電話番号　　：<input type="text" class="tel"name="tell" value="後から持ってくる"></li>
+<li>名前*　　 　：<input type="text" class="name"name="name" value=<%= request.getParameter("name") %>></li>
+<li>住所*　　 　：<input type="text" class="address"name="address" value=<%= request.getParameter("address") %>></li>
+<li>電話番号　　：<input type="text" class="tel"name="tell" value=<%= request.getParameter("tel") %>></li>
 <li class="selected">カテゴリ　　：<select name="categoryid" class="categryid">
 <option value="1"></option>
 <option value="2">親戚</option>
