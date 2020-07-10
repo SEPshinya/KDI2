@@ -6,8 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -80,83 +78,10 @@ public class ListBL extends HttpServlet {
 //-----------検索分岐SQL実行-------------------------------------------------------
 			 ps=connect.prepareStatement(SelectQuery);
 			 rs =ps.executeQuery();
-			List<String> list = new ArrayList<>();
-			List<Integer> nlist = new ArrayList<>();
 
-			 while(rs.next()) {
-				 id=rs.getInt("id");
-				 name=rs.getString("name");
-				 address=rs.getString("address");
-				 tel=rs.getString("tel");
-				 categoryid=rs.getString("categoryid");
-
-				 nlist.add(id);
-				 list.add(name);
-				 list.add(address);
-				 list.add(tel);
-				 list.add(categoryid);
-			 }
-//------------jspに飛ばす---------------------------------------------
-				 request.setAttribute("id0",nlist.get(0));
-				 request.setAttribute("name0",list.get(0));
-				 request.setAttribute("address0",list.get(1));
-				 request.setAttribute("tel0",list.get(2));
-				 request.setAttribute("categoryid0",list.get(3));
-
-				 request.setAttribute("id1",nlist.get(1));
-				 request.setAttribute("name1",list.get(4));
-				 request.setAttribute("address1",list.get(5));
-				 request.setAttribute("tel1",list.get(6));
-				 request.setAttribute("categoryid1",list.get(7));
-
-				 request.setAttribute("id2",nlist.get(2));
-				 request.setAttribute("name2",list.get(8));
-				 request.setAttribute("address2",list.get(9));
-				 request.setAttribute("tel2",list.get(10));
-				 request.setAttribute("categoryid2",list.get(11));
-
-				 request.setAttribute("id3",nlist.get(3));
-				 request.setAttribute("name3",list.get(12));
-				 request.setAttribute("address3",list.get(13));
-				 request.setAttribute("tel3",list.get(14));
-				 request.setAttribute("categoryid3",list.get(15));
-
-				 request.setAttribute("id4",nlist.get(4));
-				 request.setAttribute("name4",list.get(16));
-				 request.setAttribute("address4",list.get(17));
-				 request.setAttribute("tel4",list.get(18));
-				 request.setAttribute("categoryid4",list.get(19));
-
-				 request.setAttribute("id5",nlist.get(5));
-				 request.setAttribute("name5",list.get(20));
-				 request.setAttribute("address5",list.get(21));
-				 request.setAttribute("tel5",list.get(22));
-				 request.setAttribute("categoryid5",list.get(23));
-
-				 request.setAttribute("id6",nlist.get(6));
-				 request.setAttribute("name6",list.get(24));
-				 request.setAttribute("address6",list.get(25));
-				 request.setAttribute("tel6",list.get(26));
-				 request.setAttribute("categoryid6",list.get(27));
-
-				 request.setAttribute("id7",nlist.get(7));
-				 request.setAttribute("name7",list.get(28));
-				 request.setAttribute("address7",list.get(29));
-				 request.setAttribute("tel7",list.get(30));
-				 request.setAttribute("categoryid7",list.get(31));
-
-				 request.setAttribute("id8",nlist.get(8));
-				 request.setAttribute("name8",list.get(32));
-				 request.setAttribute("address8",list.get(33));
-				 request.setAttribute("tel8",list.get(34));
-				 request.setAttribute("categoryid8",list.get(35));
-
-				 request.setAttribute("id9",nlist.get(9));
-				 request.setAttribute("name9",list.get(36));
-				 request.setAttribute("address9",list.get(37));
-				 request.setAttribute("tel9",list.get(38));
-				 request.setAttribute("categoryid9",list.get(39));
-
+//------------rsをjspに飛ばす---------------------------------------------
+			 request.setAttribute("rs", rs);
+			 getServletContext().getRequestDispatcher("/List.jsp").forward(request, response);
 
 //-----------close-----------------------------------------------------------------
 				ps.close();

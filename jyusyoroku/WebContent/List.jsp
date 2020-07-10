@@ -3,6 +3,27 @@
 <%
 request.setCharacterEncoding("UTF-8");
 %>
+
+<%@ page import= "java.util.ArrayList"%>
+<%@ page import= "java.util.List"%>
+<%@ page import= "java.sql.ResultSet"%>
+
+<%ResultSet rs=(ResultSet)request.getAttribute("rs"); %>
+<%! int listCnt=0; %>
+<%! String nowPage=null; %>
+<%! int maxPage=0; %>
+<%! 	int id=0; //ID
+		String name=null;  //名前
+		String address=null; //住所
+		String tel=null;    //電話番号
+		String categoryid=null; //カテゴリー
+%>
+<%
+%>
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +32,6 @@ request.setCharacterEncoding("UTF-8");
 </head>
 <body>
 <form action="ListBL" method="get">
-<h1><%= request.getAttribute("nowPage")%></h1>
 <input type="button" onclick="location.href='./add.jsp'" value="新規登録">
 <ul>
 <li><input type="text" name="SerchName"></li>
@@ -31,108 +51,13 @@ request.setCharacterEncoding("UTF-8");
 
 <table>
 <tr>
-<td>No.</td>
-<td>名前</td>
-<td>住所</td>
-<td>電話番号</td>
-<td>カテゴリー</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><%= request.getAttribute("name0")%></td>
-<td><%= request.getAttribute("name0")%></td>
-<td><%= request.getAttribute("address0")%></td>
-<td><%= request.getAttribute("tel0")%></td>
-<td><%= request.getAttribute("categoryid0")%></td>
-<td><input type="button" onclick="location.href='/Edit.jsp'" value="編集"></td>
-<td><input type="button" onclick="location.href='/Delete.jsp'" value="削除"></td>
-</tr>
-<tr>
-<td><%= request.getAttribute("name1")%></td>
-<td><%= request.getAttribute("name1")%></td>
-<td><%= request.getAttribute("address1")%></td>
-<td><%= request.getAttribute("tel1")%></td>
-<td><%= request.getAttribute("categoryid1")%></td>
-<td><input type="button" onclick="location.href='/Edit.jsp'" value="編集"></td>
-<td><input type="button" onclick="location.href='/Delete.jsp'" value="削除"></td>
-</tr>
-<tr>
-<td><%= request.getAttribute("name2")%></td>
-<td><%= request.getAttribute("name2")%></td>
-<td><%= request.getAttribute("address2")%></td>
-<td><%= request.getAttribute("tel2")%></td>
-<td><%= request.getAttribute("categoryid2")%></td>
-<td><input type="button" onclick="location.href='/Edit.jsp'" value="編集"></td>
-<td><input type="button" onclick="location.href='/Delete.jsp'" value="削除"></td>
-</tr>
-<tr>
-<td><%= request.getAttribute("name3")%></td>
-<td><%= request.getAttribute("name3")%></td>
-<td><%= request.getAttribute("address3")%></td>
-<td><%= request.getAttribute("tel3")%></td>
-<td><%= request.getAttribute("categoryid3")%></td>
-<td><input type="button" onclick="location.href='/Edit.jsp'" value="編集"></td>
-<td><input type="button" onclick="location.href='/Delete.jsp'" value="削除"></td>
-</tr>
-<tr>
-<td><%= request.getAttribute("name4")%></td>
-<td><%= request.getAttribute("name4")%></td>
-<td><%= request.getAttribute("address4")%></td>
-<td><%= request.getAttribute("tel4")%></td>
-<td><%= request.getAttribute("categoryid4")%></td>
-<td><input type="button" onclick="location.href='/Edit.jsp'" value="編集"></td>
-<td><input type="button" onclick="location.href='/Delete.jsp'" value="削除"></td>
-</tr>
-<tr>
-<td><%= request.getAttribute("name5")%></td>
-<td><%= request.getAttribute("name5")%></td>
-<td><%= request.getAttribute("address5")%></td>
-<td><%= request.getAttribute("tel5")%></td>
-<td><%= request.getAttribute("categoryid5")%></td>
-<td><input type="button" onclick="location.href='/Edit.jsp'" value="編集"></td>
-<td><input type="button" onclick="location.href='/Delete.jsp'" value="削除"></td>
-</tr>
-<tr>
-<td><%= request.getAttribute("name6")%></td>
-<td><%= request.getAttribute("name6")%></td>
-<td><%= request.getAttribute("address6")%></td>
-<td><%= request.getAttribute("tel6")%></td>
-<td><%= request.getAttribute("categoryid6")%></td>
-<td><input type="button" onclick="location.href='/Edit.jsp'" value="編集"></td>
-<td><input type="button" onclick="location.href='/Delete.jsp'" value="削除"></td>
-</tr>
-<tr>
-<td><%= request.getAttribute("name7")%></td>
-<td><%= request.getAttribute("name7")%></td>
-<td><%= request.getAttribute("address7")%></td>
-<td><%= request.getAttribute("tel7")%></td>
-<td><%= request.getAttribute("categoryid7")%></td>
-<td><input type="button" onclick="location.href='/Edit.jsp'" value="編集"></td>
-<td><input type="button" onclick="location.href='/Delete.jsp'" value="削除"></td>
-</tr>
-<tr>
-<td><%= request.getAttribute("name8")%></td>
-<td><%= request.getAttribute("name8")%></td>
-<td><%= request.getAttribute("address8")%></td>
-<td><%= request.getAttribute("tel8")%></td>
-<td><%= request.getAttribute("categoryid8")%></td>
-<td><input type="button" onclick="location.href='/Edit.jsp'" value="編集"></td>
-<td><input type="button" onclick="location.href='/Delete.jsp'" value="削除"></td>
-</tr>
-<tr>
-<td><%= request.getAttribute("name9")%></td>
-<td><%= request.getAttribute("name9")%></td>
-<td><%= request.getAttribute("address9")%></td>
-<td><%= request.getAttribute("tel9")%></td>
-<td><%= request.getAttribute("categoryid9")%></td>
-<td><input type="button" onclick="location.href='/Edit.jsp'" value="編集"></td>
-<td><input type="button" onclick="location.href='/Delete.jsp'" value="削除"></td>
-</tr>
+<td>
 
 
-
+</td>
+</tr>
 </table>
+
 </form>
 </body>
 </html>

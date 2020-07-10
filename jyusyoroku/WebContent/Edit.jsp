@@ -21,7 +21,7 @@ request.setCharacterEncoding("UTF-8");
 <li>住所*　　 　：<input type="text" class="address"name="address" value="後から持ってくる"></li>
 <li>電話番号　　：<input type="text" class="tel"name="tell" value="後から持ってくる"></li>
 <li class="selected">カテゴリ　　：<select name="categoryid" class="categryid">
-<option value="1">家族</option>
+<option value="1"></option>
 <option value="2">親戚</option>
 <option value="3">知人</option>
 <option value="4">仕事</option>
