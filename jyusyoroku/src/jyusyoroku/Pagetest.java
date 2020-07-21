@@ -1,16 +1,12 @@
 package jyusyoroku;
-
-
 import java.io.IOException;
+//import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-
 
 /**
  * Servlet implementation class Pagetest
@@ -30,113 +26,111 @@ public class Pagetest extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//String SelectQuery = null;
-
-    	String maxPage="10";
-    	String nowPage="2";
-
-    	String Page1="1";
-    	String Page2="2";
-		String Page3="3";
-		String Page4="4";
-		String Page5="5";
-	     HttpSession session = request.getSession();
-	     session.setAttribute("Page1",Page1);
-	     session.setAttribute("Page2",Page2);
-	     session.setAttribute("Page3",Page3);
-	     session.setAttribute("Page4",Page4);
-	     session.setAttribute("Page5",Page5);
-
-
-
-
-
-
-
-
-
-
-
-
-		//String SerchName;
-		//int limitSta;
-
-		/*if(nowPage==null || nowPage=="1") {
-			Page1="1";
-			Page2="2";
-			Page3="3";
-			Page4="4";
-			Page5="5";
-		     HttpSession session = request.getSession(true);
-		     session.setAttribute("Page1",Page1);
-		     session.setAttribute("Page2",Page2);
-		     session.setAttribute("Page3",Page3);
-		     session.setAttribute("Page4",Page4);
-		     session.setAttribute("Page5",Page5);
-
-		};*/
-
-			/*String Page1="1";
-			String Page2="2";
-			String Page3="3";
-			String Page4="4";
-			String Page5="5";
-		     HttpSession session = request.getSession();
-		     session.setAttribute("Page1",Page1);
-		     session.setAttribute("Page2",Page2);
-		     session.setAttribute("Page3",Page3);
-		     session.setAttribute("Page4",Page4);
-		     session.setAttribute("Page5",Page5);
-
-		/* };
-		if(maxPage==nowPage) {
-			int n=Integer.parseInt(nowPage);
-			Page5=nowPage;
-			Page4=""+(n-1);
-			Page3=""+(n-2);
-			Page2=""+(n-3);
-			Page1=""+(n-4);
-			HttpSession session = request.getSession(true);
-		     session.setAttribute("Page1",Page1);
-		     session.setAttribute("Page2",Page2);
-		     session.setAttribute("Page3",Page3);
-		     session.setAttribute("Page4",Page4);
-		     session.setAttribute("Page5",Page5);
-
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String nowpage = request.getParameter("page");
+		if(nowpage==null) {
+			nowpage="1";
 		};
-		if(nowPage==PageB) {
-			int n=Integer.parseInt(nowPage);
-			Page5=""+(n+1);
-			Page4=nowPage;
-			Page3=""+(n-1);
-			Page2=""+(n-2);
-			Page1=""+(n-3);
-			HttpSession session = request.getSession(true);
-		     session.setAttribute("Page1",Page1);
-		     session.setAttribute("Page2",Page2);
-		     session.setAttribute("Page3",Page3);
-		     session.setAttribute("Page4",Page4);
-		     session.setAttribute("Page5",Page5);
+		String maxpage ="20";
+		String page1;
+		String page2;
+		String page3;
+		String page4;
+		String page5;
+		String prev;
+		String next;
+
+		int np =Integer.parseInt(nowpage);
+		int mp =Integer.parseInt(maxpage);
+		request.setAttribute("Max", maxpage);
+
+		if(np==mp){
+		next=""+mp;
+		request.setAttribute("next",next);
+		}else {
+			next=""+(np+1);
+			request.setAttribute("next",next);
 		};
 
-		if(nowPage==){
-			int n=Integer.parseInt(nowPage);
-			Page5=""+(n+2);
-			Page4=""+(n+1);
-			Page3=nowPage;
-			Page2=""+(n-1);
-			Page1=""+(n-2);
-			HttpSession session = request.getSession(true);
-		     session.setAttribute("Page1",Page1);
-		     session.setAttribute("Page2",Page2);
-		     session.setAttribute("Page3",Page3);
-		     session.setAttribute("Page4",Page4);
-		     session.setAttribute("Page5",Page5);
-		};*/
+		////////////////////////////////////////////
 
-		 getServletContext().getRequestDispatcher("/pageing.jsp").forward(request, response);
+		if(np==1){
+		prev="1";
+		request.setAttribute("prev",prev);
+		}else {
+			prev=""+(np-1);
+			request.setAttribute("prev",prev);
+		};
+
+		if(np<=3) {
+			page1="1";
+			page2="2";
+			page3="3";
+			page4="4";
+			page5="5";
+
+
+		request.setAttribute("page1", page1);
+		request.setAttribute("page2", page2);
+		request.setAttribute("page3", page3);
+		request.setAttribute("page4", page4);
+		request.setAttribute("page5", page5);
+		request.setAttribute("nowPage", nowpage);
+
+		getServletContext().getRequestDispatcher("/pageing.jsp").forward(request, response);
+
+		}else
+
+		if(np>3 && np<=mp-2) {
+			page1=""+(np-2);
+			page2=""+(np-1);
+			page3=""+np;
+			page4=""+(np+1);
+			page5=""+(np+2);
+
+
+			request.setAttribute("page1", page1);
+			request.setAttribute("page2", page2);
+			request.setAttribute("page3", page3);
+			request.setAttribute("page4", page4);
+			request.setAttribute("page5", page5);
+			request.setAttribute("nowPage", nowpage);
+
+
+			getServletContext().getRequestDispatcher("/pageing.jsp").forward(request, response);
+		}else
+
+		if(np<=mp&&np>=mp-2){
+
+		page1=""+(mp-4);
+		page2=""+(mp-3);
+		page3=""+(mp-2);
+		page4=""+(mp-1);
+		page5=""+(mp);
+
+		request.setAttribute("page1", page1);
+		request.setAttribute("page2", page2);
+		request.setAttribute("page3", page3);
+		request.setAttribute("page4", page4);
+		request.setAttribute("page5", page5);
+		request.setAttribute("nowPage", nowpage);
+
+	    getServletContext().getRequestDispatcher("/pageing.jsp").forward(request, response);
 
 	}
+}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//doGet(request, response);
+		//String nowpage = request.getParameter("page");
+		//HttpSession session = request.getSession();
+	    //session.setAttribute("nowPage", nowpage);
+	    //getServletContext().getRequestDispatcher("/pageing.jsp").forward(request, response);
+
+	}
+
 }

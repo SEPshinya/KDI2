@@ -8,6 +8,7 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="addcheck.css">
 <title></title>
 </head>
 <body>
@@ -25,7 +26,7 @@ request.setCharacterEncoding("UTF-8");
 <input type="hidden" name="tell" value="<%= request.getParameter("tell") %>">
 <input type="hidden" name="categoryid" value="<%= request.getParameter("categoryid") %>">
 
-<input type="submit" value="確認">
+<input type="submit" value="確認" >
 <input type="reset" value="戻る">
 
 </form>

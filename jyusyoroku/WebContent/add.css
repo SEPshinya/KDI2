@@ -1,0 +1,43 @@
+@charset "UTF-8";
+/*pc表示*/
+
+
+p{
+	font-size:20px;
+	font-weight:bold;
+}
+input.name{
+	width:30%;
+}
+
+input.address{
+	width:500px;
+}
+
+input.tel{
+	width:30%;
+}
+select.categoryid{
+	width:30%;
+	color: #7030A0;
+}
+.selected {
+    color: #7030A0;
+}
+
+div{
+  display: flex;
+  justify-content: center;
+}
+li {
+  width: 100%;
+  list-style-type: none;
+  text-align:left;
+}
+submit.{
+	float:left;
+}
+
+input.submit{
+	display: inline-block;
+}
