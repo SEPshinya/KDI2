@@ -1,7 +1,6 @@
 package jyusyoroku;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,18 +11,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
- * Servlet implementation class AddCommitBL
+ * Servlet implementation class DeleteCommit
  */
-@WebServlet("/AddCommitBL")
-public class AddCommitBL extends HttpServlet {
+@WebServlet("/DeleteCommit")
+public class DeleteCommit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddCommitBL() {
+    public DeleteCommit() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,52 +30,23 @@ public class AddCommitBL extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		this.doPost(request, response);
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
-		PrintWriter out=response.getWriter();
-	    //response.setContentType("text/html; charset=Shift_JIS");
-
-
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
 		     Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/hara?characterEncoding=UTF-8&serverTimezone=JST", "root", "");
 		     request.setCharacterEncoding("UTF-8");
-		     String name = request.getParameter("name");
-		     String address = request.getParameter("address");
-		     String tel = request.getParameter("tell");
-		     String categoryid = request.getParameter("categoryid");
+		     String id = request.getParameter("id");
 
 
+//UPDATE テーブル名 SET 列名 = データ, 列名 = データ ,.... ;
 
+		     PreparedStatement stmt = con.prepareStatement("UPDATE jyusyoroku SET delete_flg=1 where id=" +"'"+ id +"'");
 
-		     PreparedStatement stmt = con.prepareStatement( "insert into jyusyoroku values (null,?,?,?,?,0)");
-
-		     stmt.setString(1,name);
-		     stmt.setString(2,address);
-		     stmt.setString(3,tel);
-		     stmt.setString(4,categoryid);
-
-
-
+		     con.commit();
 		     stmt.close();
 		     con.close();
 		}catch(Exception e){
-
 		}
-
 		getServletContext().getRequestDispatcher("/ListBL").forward(request, response);
 	}
-
 }
-
-
 

@@ -27,9 +27,6 @@ public class ListBL extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Connection connect=null;   //接続
 		Statement stmt=null;       //接続
@@ -44,7 +41,6 @@ public class ListBL extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");//文字コード
 
-
 //-----------データベース接続-----------------------------------------------------
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
@@ -56,6 +52,7 @@ public class ListBL extends HttpServlet {
 			 rs = stmt.executeQuery(CntQuery);
 			 rs.next();
 			 listCnt = rs.getInt("id");
+			 request.setAttribute("listCnt", listCnt);
 
 //-----------検索分岐-------------------------------------------------------------
 			 SerchName = request.getParameter("SerchName");
@@ -65,41 +62,24 @@ public class ListBL extends HttpServlet {
 			 }else {
 				 SelectQuery="select * from jyusyoroku where delete_flg=0 and address like "+"'"+SerchName+"'"+" limit "+limitSta+",10";
 			 };
-
 //-----------検索分岐SQL実行-------------------------------------------------------
 			 ps=connect.prepareStatement(SelectQuery);
 			 rs =ps.executeQuery();
-
-
 //------------rsをjspに飛ばす---------------------------------------------
 			 request.setAttribute("rs", rs);
-			// RequestDispatcher rd=request.getRequestDispatcher("/List.jsp");
-			// rd.forward(request, response);
 
-//-----------close-----------------------------------------------------------------
-				//ps.close();
-				//stmt.close();
-				//rs.close();
-			    //connect.close();
 			}catch(Exception e){
 
 			}
-//---------------ページング用---------------------
-		String page1=null;
-		String page2=null;
-		String page3=null;
-		String page4=null;
-		String page5=null;
-		String prev=null;
-		String next=null;
 //---------------ページングの処理----------------------------
 		nowPage = request.getParameter("page");
 		if(nowPage==null) {
 		nowPage="1";
 		}
-
+		request.setAttribute("nowPage", nowPage);
 
 		int np =Integer.parseInt(nowPage);
+		request.setAttribute("np", np);
 		if(np>1) {
 		limitSta=(np-1)*10;
 		}else{
@@ -108,77 +88,9 @@ public class ListBL extends HttpServlet {
 
 //---------------最大ページを計算-----------------------------
 		int maxPage=listCnt/10;
-		int mp =maxPage;
-		request.setAttribute("Max", maxPage);
-
-		if(np==mp){
-		next=""+mp;
-		request.setAttribute("next",next);
-		}else {
-			next=""+(np+1);
-			request.setAttribute("next",next);
-		};
-
-		if(np==1){
-		prev="1";
-		request.setAttribute("prev",prev);
-		}else {
-			prev=""+(np-1);
-			request.setAttribute("prev",prev);
-		};
-//			1から３ページまで
-		if(np<=3) {
-			page1="1";
-			page2="2";
-			page3="3";
-			page4="4";
-			page5="5";
-
-		request.setAttribute("page1", page1);
-		request.setAttribute("page2", page2);
-		request.setAttribute("page3", page3);
-		request.setAttribute("page4", page4);
-		request.setAttribute("page5", page5);
-		request.setAttribute("nowPage", nowPage);
-
-		getServletContext().getRequestDispatcher("/List.jsp").forward(request, response);
-
-		}else
-//3ページ以上max-2未満
-		if(np>3 && np<=mp-2) {
-			page1=""+(np-2);
-			page2=""+(np-1);
-			page3=""+np;
-			page4=""+(np+1);
-			page5=""+(np+2);
-
-			request.setAttribute("page1", page1);
-			request.setAttribute("page2", page2);
-			request.setAttribute("page3", page3);
-			request.setAttribute("page4", page4);
-			request.setAttribute("page5", page5);
-			request.setAttribute("nowPage", nowPage);
-
-			getServletContext().getRequestDispatcher("/List.jsp").forward(request, response);
-		}else
-//maxpage-2からのページ
-		if(np<=mp&&np>=mp-2){
-
-		page1=""+(mp-4);
-		page2=""+(mp-3);
-		page3=""+(mp-2);
-		page4=""+(mp-1);
-		page5=""+(mp);
-
-		request.setAttribute("page1", page1);
-		request.setAttribute("page2", page2);
-		request.setAttribute("page3", page3);
-		request.setAttribute("page4", page4);
-		request.setAttribute("page5", page5);
-		request.setAttribute("nowPage", nowPage);
+		request.setAttribute("maxPage", maxPage);
 	    getServletContext().getRequestDispatcher("/List.jsp").forward(request, response);
-	 }
-}
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

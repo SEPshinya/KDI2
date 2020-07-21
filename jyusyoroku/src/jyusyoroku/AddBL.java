@@ -44,10 +44,5 @@ public class AddBL extends HttpServlet {
 
 	     getServletContext().getRequestDispatcher("/addCheck.jsp").forward(request, response);
 
-
-
-
-
-
 	}
 }

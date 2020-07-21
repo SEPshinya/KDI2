@@ -9,16 +9,17 @@ request.setCharacterEncoding("UTF-8");
 <%@ page import= "java.sql.*"%>
 
 <%  ResultSet rs=(ResultSet)request.getAttribute("rs");%>
+<% String nowPage=(String)request.getAttribute("nowPage"); %>
+<% //int maxPage=(int)request.getAttribute("maxPage");%>
+<% int np=(int)request.getAttribute("np"); %>
 <%! int listCnt=0;
-	String nowPage=null;
-	int maxPage=0;
 	int id=0; //ID
 	String name=null;  //名前
 	String address=null; //住所
 	String tel=null;    //電話番号
 	String categoryid=null; //カテゴリー
+	int maxPage=3;
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,37 +28,12 @@ request.setCharacterEncoding("UTF-8");
 <title>住所録一覧</title>
 </head>
 <body>
-<form action="ListBL" method="get">
+<form>
 <input type="button" onclick="location.href='./add.jsp'" value="新規登録">
-<ul>
+<ul style="list-style-type: none">
 <li><input type="text" name="SerchName"></li>
 <li><input type="submit" value="検索"></li>
 </ul>
-<<<<<<< HEAD
-<ul>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-
-</ul>
-=======
-<table>
-<tr>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜＜</a></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("prev")%>">＜</a></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("page1")%>"><%= request.getAttribute("page1")%></a><br></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("page2")%>"><%= request.getAttribute("page2")%></a><br></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("page3")%>"><%= request.getAttribute("page3")%></a><br></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("page4")%>"><%= request.getAttribute("page4")%></a><br></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("page5")%>"><%= request.getAttribute("page5")%></a><br></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("next")%>">＞</a><br></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("Max")%>">＞＞</a></td>
-</tr>
-</table>
-
->>>>>>> branch 'master' of https://github.com/SEPshinya/KDI2
 </form>
 <table border="1">
 <%
@@ -83,30 +59,233 @@ while(rs.next()){
 	<button type="submit" formaction="Delete.jsp">排除</button></td>
 	</tr>
 </form>
-
-<%
-	}
-%>
+<%}%>
 </table>
 
-<form action="ListBL">
+
+
+<form>
+<% if(maxPage==1||maxPage==0){ %>
+<table>
+<tr>
+<td>＜＜</td>
+<td>＜</td>
+<td>1</td>
+<td>＞</td>
+<td>＞＞</td>
+</tr>
+</table>
+<%} else if(maxPage==2&&np==1){%>
+<table>
+<tr>
+<td>＜＜</td>
+<td>＜</td>
+<td>1</td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">2</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">＞</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">＞＞</a></td>
+</tr>
+</table>
+
+<%} else if(maxPage==2&&np==2){%>
+<table>
+<tr>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">1</a></td>
+<td>2</td>
+<td>＞</td>
+<td>＞＞</td>
+</tr>
+</table>
+
+<%} else if(maxPage==3&&np==1){%>
+<table>
+<tr>
+<td>＜＜</td>
+<td>＜</td>
+<td>1</td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">2</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=3">3</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">＞</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=3">＞＞</a></td>
+</tr>
+</table>
+
+<%} else if(maxPage==3&&np==2){%>
 <table>
 <tr>
 <td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜＜</a></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("prev")%>">＜</a></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("page1")%>"><%= request.getAttribute("page1")%></a><br></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("page2")%>"><%= request.getAttribute("page2")%></a><br></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("page3")%>"><%= request.getAttribute("page3")%></a><br></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("page4")%>"><%= request.getAttribute("page4")%></a><br></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("page5")%>"><%= request.getAttribute("page5")%></a><br></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("next")%>">＞</a><br></td>
-<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%= request.getAttribute("Max")%>">＞＞</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">1</a></td>
+<td>2</td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=3">3</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=3">＞</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=3">＞＞</a></td>
 </tr>
 </table>
+
+<%} else if(maxPage==3&&np==3){%>
+<table>
+<tr>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">1</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">2</a></td>
+<td>3</td>
+<td>＞</td>
+<td>＞＞</td>
+</tr>
+</table>
+
+<%} else if(maxPage==4&&np==1){%>
+<table>
+<tr>
+<td>＜＜</td>
+<td>＜</td>
+<td>1</td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">2</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=3">3</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=4">4</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">＞</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=4">＞＞</a></td>
+</tr>
+</table>
+
+<%} else if(maxPage==4&&np==2){%>
+<table>
+<tr>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">1</a></td>
+<td>2</td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=3">3</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=4">4</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=3">＞</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=4">＞＞</a></td>
+</tr>
+</table>
+
+<%} else if(maxPage==4&&np==3){%>
+<table>
+<tr>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">1</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">2</a></td>
+<td>3</td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=4">4</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=4">＞</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=4">＞＞</a></td>
+</tr>
+</table>
+<%} else if(maxPage==4&&np==4){%>
+<table>
+<tr>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">1</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">2</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=3">3</a></td>
+<td>4</td>
+<td>＞</td>
+<td>＞＞</td>
+</tr>
+</table>
+<%}else if(maxPage>=5&&np==1){ %>
+<table>
+<tr>
+<td>＜＜</td>
+<td>＜</td>
+<td>1</td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">2</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=3">3</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=4">4</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=5">5</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">＞</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=5">＞＞</a></td>
+</tr>
+</table>
+<%}else if(maxPage>=5&&np==2){ %>
+<table>
+<tr>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">1</a></td>
+<td>2</td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=3">3</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=4">4</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=5">5</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=3">＞</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=5">＞＞</a></td>
+</tr>
+</table>
+
+<%}else if(maxPage>=5&&np==3){ %>
+<table>
+<tr>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np-1)%>">＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">1</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=2">2</a></td>
+<td>3</td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=4">4</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=5">5</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np+1)%>">＞</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=maxPage%>">＞＞</a></td>
+</tr>
+</table>
+
+<%}else if(maxPage==np){%>
+<table>
+<tr>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np-1)%>">＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np-4)%>"><%=String.valueOf(np-4)%></a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np-3)%>"><%=String.valueOf(np-3)%></a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np-2)%>"><%=String.valueOf(np-2)%></a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np-1)%>"><%=String.valueOf(np-1)%></a></td>
+<td><%=String.valueOf(maxPage)%></td>
+<td>＞</td>
+<td>＞＞</td>
+</tr>
+</table>
+
+<%}else if(maxPage-1==np){ %>
+<table>
+<tr>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np-1)%>">＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np-3)%>"><%=String.valueOf(np-3)%></a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np-2)%>"><%=String.valueOf(np-2)%></a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np-1)%>"><%=String.valueOf(np-1)%></a></td>
+<td><%=String.valueOf(np)%></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(maxPage)%>"><%=String.valueOf(maxPage)%></a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np+1)%>">＞</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=maxPage%>">＞＞</a></td>
+</tr>
+</table>
+
+<%}else{ %>
+<table>
+<tr>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=1">＜＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np-1)%>">＜</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np-2)%>"><%=String.valueOf(np-2)%></a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np-1)%>"><%=String.valueOf(np-1)%></a></td>
+<td><%=String.valueOf(np)%></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np+1)%>"><%=String.valueOf(np+1)%></a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np+2)%>"><%=String.valueOf(np+2)%></a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=String.valueOf(np+1)%>">＞</a></td>
+<td><a href="http://localhost:8080/jyusyoroku/ListBL?page=<%=maxPage%>">＞＞</a></td>
+</tr>
+</table>
+<%}%>
 <input type="button" onclick="location.href='./add.jsp'" value="新規登録">
 </form>
 
 
-
+maxPage---- <%=maxPage %>
+nowPage----<%=nowPage %>
 </body>
 </html>

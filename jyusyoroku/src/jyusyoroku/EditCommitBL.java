@@ -59,16 +59,14 @@ public class EditCommitBL extends HttpServlet {
 		     stmt.setString(2,address);
 		     stmt.setString(3,tell);
 		     stmt.setString(4,categoryid);
-		     int line=stmt.executeUpdate();
+		     stmt.executeUpdate();
 
-			    if(line>0) {
-			    	 out.println("できたわよ");
-			      }
 		     stmt.close();
 		     con.close();
 		}catch(Exception e){
 			e.printStackTrace(out);
 		}
+		getServletContext().getRequestDispatcher("/ListBL").forward(request, response);
 
 
 	}
