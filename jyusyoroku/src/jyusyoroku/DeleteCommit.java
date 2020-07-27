@@ -30,6 +30,7 @@ public class DeleteCommit extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
 		     Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/hara?characterEncoding=UTF-8&serverTimezone=JST", "root", "");
@@ -40,8 +41,8 @@ public class DeleteCommit extends HttpServlet {
 //UPDATE テーブル名 SET 列名 = データ, 列名 = データ ,.... ;
 
 		     PreparedStatement stmt = con.prepareStatement("UPDATE jyusyoroku SET delete_flg=1 where id=" +"'"+ id +"'");
+		     stmt.executeUpdate();
 
-		     con.commit();
 		     stmt.close();
 		     con.close();
 		}catch(Exception e){

@@ -12,14 +12,21 @@ request.setCharacterEncoding("UTF-8");
 <% String nowPage=(String)request.getAttribute("nowPage"); %>
 <% //int maxPage=(int)request.getAttribute("maxPage");%>
 <% int np=(int)request.getAttribute("np"); %>
-<%! int listCnt=0;
-	int id=0; //ID
+<% int listCnt=(int)request.getAttribute("listCnt"); %>
+<%!	int id=0; //ID
 	String name=null;  //名前
 	String address=null; //住所
 	String tel=null;    //電話番号
 	String categoryid=null; //カテゴリー
-	int maxPage=3;
+	int maxPage=0;
 %>
+<%maxPage=listCnt/10; %>
+
+<%if(listCnt%10>0){
+	maxPage=maxPage+1;
+}%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,6 +43,14 @@ request.setCharacterEncoding("UTF-8");
 </ul>
 </form>
 <table border="1">
+<tr>
+<td>No</td>
+<td>名前</td>
+<td>住所</td>
+<td>電話番号</td>
+<td>カテゴリー</td>
+<td></td>
+</tr>
 <%
 while(rs.next()){
 %>
@@ -284,8 +299,5 @@ while(rs.next()){
 <input type="button" onclick="location.href='./add.jsp'" value="新規登録">
 </form>
 
-
-maxPage---- <%=maxPage %>
-nowPage----<%=nowPage %>
 </body>
 </html>

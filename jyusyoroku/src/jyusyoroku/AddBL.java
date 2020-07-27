@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
 
@@ -31,16 +30,16 @@ public class AddBL extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 	     String name = request.getParameter("name");
 	     String address = request.getParameter("address");
 	     String tell = request.getParameter("tell");
 	     String categoryid = request.getParameter("categoryid");
 
-	     HttpSession session = request.getSession();
-	     session.setAttribute("name", name);
-	     session.setAttribute("address", address);
-	     session.setAttribute("tell", tell);
-	     session.setAttribute("categoryid",categoryid);
+	     request.setAttribute("name", name);
+	     request.setAttribute("address", address);
+	     request.setAttribute("tell", tell);
+	     request.setAttribute("categoryid",categoryid);
 
 	     getServletContext().getRequestDispatcher("/addCheck.jsp").forward(request, response);
 

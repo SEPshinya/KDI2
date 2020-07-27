@@ -31,6 +31,7 @@ request.setCharacterEncoding("UTF-8");
 </ul>
 </div>
 <div class=submit align=center>
+<input type="hidden" name="id" value="<%= request.getParameter("id") %>">
 <input type="submit" value="確認" style="width:200px;height:25px">
 <input type="reset" value="戻る" style="width:200px;height:25px">
 </div>

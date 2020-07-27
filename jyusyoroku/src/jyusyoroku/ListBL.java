@@ -28,18 +28,29 @@ public class ListBL extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Connection connect=null;   //接続
+		//Connection connect=null;  //接続
+    	request.setCharacterEncoding("UTF-8");
 		Statement stmt=null;       //接続
 		PreparedStatement ps=null; //接続
 		ResultSet rs=null;         //取得
-		int listCnt=0;        //総件数
+		int listCnt=0;            //総件数
 		String SelectQuery=null; //表取得
 		String CntQuery=null;    //件数取得
 		String nowPage=null;     //現在のページ
-		String SerchName=null;  //検索用文字列 HTMLからテキストで持ってくる
-		int limitSta=0;     //検索開始位置
+		String SerchName=null;   //検索用文字列
+		int limitSta=0;          //検索開始位置
 
-		request.setCharacterEncoding("UTF-8");//文字コード
+//-----------検索開始位置-----------------------------------------------------
+		nowPage = request.getParameter("page");
+		if(nowPage==null) {
+		nowPage="1";
+		}
+		int np =Integer.parseInt(nowPage);
+		request.setAttribute("np", np);
+		if(np>1) {
+		limitSta=(np-1)*10;
+		};
+
 
 //-----------データベース接続-----------------------------------------------------
 		try {
@@ -71,24 +82,7 @@ public class ListBL extends HttpServlet {
 			}catch(Exception e){
 
 			}
-//---------------ページングの処理----------------------------
-		nowPage = request.getParameter("page");
-		if(nowPage==null) {
-		nowPage="1";
-		}
-		request.setAttribute("nowPage", nowPage);
 
-		int np =Integer.parseInt(nowPage);
-		request.setAttribute("np", np);
-		if(np>1) {
-		limitSta=(np-1)*10;
-		}else{
-			limitSta=np*10;
-		};
-
-//---------------最大ページを計算-----------------------------
-		int maxPage=listCnt/10;
-		request.setAttribute("maxPage", maxPage);
 	    getServletContext().getRequestDispatcher("/List.jsp").forward(request, response);
     }
 

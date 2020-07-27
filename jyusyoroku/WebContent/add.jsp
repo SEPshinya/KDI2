@@ -31,8 +31,8 @@ request.setCharacterEncoding("UTF-8");
 </div>
 
 <div class=submit align=center>
-<input class="submit" type="submit" value="確認" style="width:200px;height:25px">
-<input class="reset" type="button" value="戻る" style="width:200px;height:25px">
+<input  type="submit" value="確認" style="width:200px;height:25px">
+<input  type="reset" value="戻る" style="width:200px;height:25px">
 </div>
 
 

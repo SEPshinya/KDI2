@@ -25,6 +25,8 @@ request.setCharacterEncoding("UTF-8");
 <input type="hidden" name="address" value="<%= request.getParameter("address") %>">
 <input type="hidden" name="tell" value="<%= request.getParameter("tell") %>">
 <input type="hidden" name="categoryid" value="<%= request.getParameter("categoryid") %>">
+<input type="hidden" name="id" value="<%= request.getParameter("id") %>">
+
 
 <input type="submit" value="確認" >
 <input type="reset" value="戻る">

@@ -1,7 +1,6 @@
 package jyusyoroku;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -27,56 +26,45 @@ public class AddCommitBL extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		this.doPost(request, response);
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		this.doPost(request, response);
-
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
-		PrintWriter out=response.getWriter();
-	    //response.setContentType("text/html; charset=Shift_JIS");
+		request.setCharacterEncoding("UTF-8");
 
 
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
-		     Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/hara?characterEncoding=UTF-8&serverTimezone=JST", "root", "");
+		     Connection connect = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/hara?characterEncoding=UTF-8&serverTimezone=JST", "root", "");
 		     request.setCharacterEncoding("UTF-8");
 		     String name = request.getParameter("name");
 		     String address = request.getParameter("address");
-		     String tel = request.getParameter("tell");
+		     String tel = request.getParameter("tel");
 		     String categoryid = request.getParameter("categoryid");
+		     String InsQuery=null;
 
+		     if(tel==null) {
+		    	 tel=" ";
+		     }
 
+		     InsQuery="INSERT INTO jyusyoroku (name, address, tel, categoryid, delete_flg) VALUES ('"+name+"','"+ address+"','"+tel+"','"+categoryid+"','0')";
 
-
-		     PreparedStatement stmt = con.prepareStatement( "insert into jyusyoroku values (null,?,?,?,?,0)");
-
-		     stmt.setString(1,name);
-		     stmt.setString(2,address);
-		     stmt.setString(3,tel);
-		     stmt.setString(4,categoryid);
-
+		     PreparedStatement stmt = connect.prepareStatement(InsQuery);
+		     stmt.executeUpdate();
 
 
 		     stmt.close();
-		     con.close();
+		     connect.close();
 		}catch(Exception e){
 
 		}
 
 		getServletContext().getRequestDispatcher("/ListBL").forward(request, response);
 	}
-
 }
 
 

@@ -2,7 +2,6 @@
 package jyusyoroku;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -39,8 +38,8 @@ public class EditCommitBL extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		PrintWriter out=response.getWriter();
+		request.setCharacterEncoding("UTF-8");
+
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
 		     Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/hara?characterEncoding=UTF-8&serverTimezone=JST", "root", "");
@@ -49,11 +48,10 @@ public class EditCommitBL extends HttpServlet {
 		     String address = request.getParameter("address");
 		     String tell = request.getParameter("tell");
 		     String categoryid = request.getParameter("categoryid");
-
-
+		     String id = request.getParameter("id");
 
 		     //UPDATE [テーブル名] SET [更新処理] WHERE [条件式]
-		     PreparedStatement stmt = con.prepareStatement("update jyusyoroku set  name=?,address=?,tel=?,categoryid=?  where id='1'");
+		     PreparedStatement stmt = con.prepareStatement("update jyusyoroku set  name=?,address=?,tel=?,categoryid=?  where id="+id);
 
 		     stmt.setString(1,name);
 		     stmt.setString(2,address);
@@ -64,7 +62,7 @@ public class EditCommitBL extends HttpServlet {
 		     stmt.close();
 		     con.close();
 		}catch(Exception e){
-			e.printStackTrace(out);
+
 		}
 		getServletContext().getRequestDispatcher("/ListBL").forward(request, response);
 

@@ -28,7 +28,7 @@ public class Delete extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		request.setCharacterEncoding("UTF-8");
 	     String name = request.getParameter("name");
 	     String address = request.getParameter("address");
 	     String tell = request.getParameter("tell");
